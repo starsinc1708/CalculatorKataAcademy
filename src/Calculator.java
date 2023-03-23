@@ -73,7 +73,7 @@ public class Calculator {
         String[] parts = input.split("\\s+");
 
         if (parts.length != 3) {
-            throw new IllegalArgumentException("Invalid input format. Please provide two numbers and an operator separated by spaces.");
+            throw new IllegalArgumentException("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
         }
 
         String num1 = parts[0];
@@ -86,18 +86,18 @@ public class Calculator {
 
         if (isRomanNumeral(num1)) {
             if (!isRomanNumeral(num2)) {
-                throw new IllegalArgumentException("Invalid input format. Arabic and Roman numerals cannot be used in the same expression.");
+                throw new IllegalArgumentException("используются одновременно разные системы счисления");
             }
             isRoman = true;
         } else if (isRomanNumeral(num2)) {
-            throw new IllegalArgumentException("Invalid input format. Arabic and Roman numerals cannot be used in the same expression.");
+            throw new IllegalArgumentException("используются одновременно разные системы счисления");
         }
 
         if(!isRoman) {
             n1 = Integer.parseInt(num1);
             n2 = Integer.parseInt(num2);
             if (n1 < 1 || n1 > 10 || n2 < 1 || n2 > 10) {
-                throw new IllegalArgumentException("Invalid input. The calculator only accepts numbers from 1 to 10 inclusive.");
+                throw new IllegalArgumentException("Калькулятор принимает на вход числа от 1 до 10 включительно, не более");
             }
         } else {
             n1 = ROMAN_NUMERALS.get(num1);
@@ -120,12 +120,12 @@ public class Calculator {
                 result = n1 / n2;
                 break;
             default:
-                throw new IllegalArgumentException("Invalid operator. The calculator only accepts +, -, *, and / operators.");
+                throw new IllegalArgumentException("неверный оператор, поддерживаются только (+, -, /, *)");
         }
 
         if (isRoman) {
             if (result < 1) {
-                throw new IllegalArgumentException("Invalid input. The result of the calculator with Roman numerals can only be positive numbers.");
+                throw new IllegalArgumentException("в римской системе нет отрицательных чисел");
             }
             return intToRoman(result);
         } else {
