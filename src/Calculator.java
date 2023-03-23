@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Calculator {
 
@@ -133,6 +134,11 @@ public class Calculator {
     }
 
     public static void main(String[] args) {
-        System.out.println(calc("X * X"));
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Input a number: ");
+        String expression = String.valueOf(in.nextLine());
+        //System.out.print(expression + " = ");
+        System.out.println(calc(expression));
     }
 }
